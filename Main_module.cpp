@@ -20,7 +20,7 @@ __fastcall TForm1::TForm1(TComponent* Owner)
 
 
 
-// Действия при запуске приложения ------------------------------------------
+// Р”РµР№СЃС‚РІРёСЏ РїСЂРё Р·Р°РїСѓСЃРєРµ РїСЂРёР»РѕР¶РµРЅРёСЏ ------------------------------------------
 void __fastcall TForm1::FormCreate(TObject *Sender)
 {
 
@@ -30,8 +30,8 @@ void __fastcall TForm1::FormCreate(TObject *Sender)
 
         ScrollBar4->Enabled = false;
 
-        // шапка таблицы
-        StringGrid1->Cells[0][0] = " №";
+        // С€Р°РїРєР° С‚Р°Р±Р»РёС†С‹
+        StringGrid1->Cells[0][0] = " в„–";
         StringGrid1->Cells[1][0] = "data";
                                                                                 
         StartFreq = ScrollBar6->Position;
@@ -56,7 +56,7 @@ void __fastcall TForm1::FormCreate(TObject *Sender)
         Panel12->Color = clBlue;
         Panel12->BevelOuter = bvLowered;
 
-        // файл конфигурации графика
+        // С„Р°Р№Р» РєРѕРЅС„РёРіСѓСЂР°С†РёРё РіСЂР°С„РёРєР°
         Ini = new TIniFile(ExtractFilePath(Application->ExeName)+
                                                         "aoconfig.ini");
 
@@ -99,7 +99,7 @@ void __fastcall TForm1::FormCreate(TObject *Sender)
         ADC_FPU_Get[1] = ADC_FPU_10;
 
 
-        // адаптивность при создании формы
+        // Р°РґР°РїС‚РёРІРЅРѕСЃС‚СЊ РїСЂРё СЃРѕР·РґР°РЅРёРё С„РѕСЂРјС‹
         Chart1->Width = Form1->Width-StringGrid1->Width-GroupBox1->Width-
                                                                 form_edge;
         Chart1->Height = Form1->Height-Panel3->Height*2-GroupBox4->Height;
@@ -120,7 +120,7 @@ void __fastcall TForm1::FormCreate(TObject *Sender)
 
 }
 
-// адаптивность при изменении размеров --------------------------------------
+// Р°РґР°РїС‚РёРІРЅРѕСЃС‚СЊ РїСЂРё РёР·РјРµРЅРµРЅРёРё СЂР°Р·РјРµСЂРѕРІ --------------------------------------
 void __fastcall TForm1::FormResize(TObject *Sender)
 {
         Chart1->Width = Form1->Width-StringGrid1->Width-GroupBox1->Width-
@@ -142,18 +142,18 @@ void __fastcall TForm1::FormResize(TObject *Sender)
         GroupBox4->Width = Chart1->Width;
 }
 
-// действия по показу формы -------------------------------------------------
+// РґРµР№СЃС‚РІРёСЏ РїРѕ РїРѕРєР°Р·Сѓ С„РѕСЂРјС‹ -------------------------------------------------
 void __fastcall TForm1::FormShow(TObject *Sender)
 {
-        // инициализация платы управления (контроллера)
+        // РёРЅРёС†РёР°Р»РёР·Р°С†РёСЏ РїР»Р°С‚С‹ СѓРїСЂР°РІР»РµРЅРёСЏ (РєРѕРЅС‚СЂРѕР»Р»РµСЂР°)
         Button2Click(Sender);
-        // инициализация платы ФПУ
+        // РёРЅРёС†РёР°Р»РёР·Р°С†РёСЏ РїР»Р°С‚С‹ Р¤РџРЈ
         Button8Click(Sender);
-        // загрузка тестовой АЧХ
+        // Р·Р°РіСЂСѓР·РєР° С‚РµСЃС‚РѕРІРѕР№ РђР§РҐ
         Button4Click(Sender);
 }
 
-// действия по закрытию приложения ------------------------------------------
+// РґРµР№СЃС‚РІРёСЏ РїРѕ Р·Р°РєСЂС‹С‚РёСЋ РїСЂРёР»РѕР¶РµРЅРёСЏ ------------------------------------------
 void __fastcall TForm1::FormClose(TObject *Sender,
                                   TCloseAction &Action)
 {                        
@@ -161,23 +161,23 @@ void __fastcall TForm1::FormClose(TObject *Sender,
         Ini = NULL;
 
         if (!Button27->Enabled) {
-                Application->MessageBoxA("Остановите сбор данных", "", MB_OK);
+                Application->MessageBoxA("РћСЃС‚Р°РЅРѕРІРёС‚Рµ СЃР±РѕСЂ РґР°РЅРЅС‹С…", "", MB_OK);
                 Action = caNone;
                 return;
         }
 
         if (!Button9->Enabled) {
-                Application->MessageBoxA("Остановите свипирование", "", MB_OK);
+                Application->MessageBoxA("РћСЃС‚Р°РЅРѕРІРёС‚Рµ СЃРІРёРїРёСЂРѕРІР°РЅРёРµ", "", MB_OK);
                 Action = caNone;
                 return;
         }
 
-        // закрываем платы
+        // Р·Р°РєСЂС‹РІР°РµРј РїР»Р°С‚С‹
         FT_Close(ftHandle_Contrl);
         FT_Close(ftHandle_FPU);
 }                                    
 
-// функция контроля состояния порта ФПУ -------------------------------------
+// С„СѓРЅРєС†РёСЏ РєРѕРЅС‚СЂРѕР»СЏ СЃРѕСЃС‚РѕСЏРЅРёСЏ РїРѕСЂС‚Р° Р¤РџРЈ -------------------------------------
 void __fastcall TForm1::FTStatFPU(AnsiString Ind)
 {
         if (ftStatus_FPU == FT_OK) {
@@ -192,26 +192,26 @@ void __fastcall TForm1::FTStatFPU(AnsiString Ind)
                 switch (ftStatus_FPU) {
 
                         case FT_INVALID_HANDLE:
-                                Indicator1 = "неверный дескриптор";
+                                Indicator1 = "РЅРµРІРµСЂРЅС‹Р№ РґРµСЃРєСЂРёРїС‚РѕСЂ";
                                 break;
 
                         case FT_DEVICE_NOT_FOUND:
-                                Indicator1 = "устройство не найдено";
+                                Indicator1 = "СѓСЃС‚СЂРѕР№СЃС‚РІРѕ РЅРµ РЅР°Р№РґРµРЅРѕ";
                                 break;
 
                         case FT_DEVICE_NOT_OPENED:
-                                Indicator1 = "невозможно открыть";
+                                Indicator1 = "РЅРµРІРѕР·РјРѕР¶РЅРѕ РѕС‚РєСЂС‹С‚СЊ";
                                 break;
 
                         default:
-                                Indicator1 = "ошибка открытия";
+                                Indicator1 = "РѕС€РёР±РєР° РѕС‚РєСЂС‹С‚РёСЏ";
                 }
         }
 
         Panel14->Caption = Indicator1;
 } 
 
-// получение информации от ФПУ ----------------------------------------------
+// РїРѕР»СѓС‡РµРЅРёРµ РёРЅС„РѕСЂРјР°С†РёРё РѕС‚ Р¤РџРЈ ----------------------------------------------
 void __fastcall TForm1::GetInfoFT2(unsigned char *pData,
                                    DWORD ToRead)
 {
@@ -223,13 +223,13 @@ void __fastcall TForm1::GetInfoFT2(unsigned char *pData,
                 /*
                 if (i>TryToRead) {
                         Panel14->Font->Color = clRed;
-                        Panel14->Caption = "Превышен интервал чтения";
+                        Panel14->Caption = "РџСЂРµРІС‹С€РµРЅ РёРЅС‚РµСЂРІР°Р» С‡С‚РµРЅРёСЏ";
                         break;
                 }     */
 
                 //Sleep(SleepInterv);
 
-                // проверяем приёмный буфер на наличие данных
+                // РїСЂРѕРІРµСЂСЏРµРј РїСЂРёС‘РјРЅС‹Р№ Р±СѓС„РµСЂ РЅР° РЅР°Р»РёС‡РёРµ РґР°РЅРЅС‹С…
                 FT_GetQueueStatus(ftHandle_FPU,&RxBytes2);
 
                 Application->ProcessMessages(); 
@@ -244,14 +244,14 @@ void __fastcall TForm1::GetInfoFT2(unsigned char *pData,
 
                         if (ftStatus_FPU != FT_OK) {
                                 Panel14->Font->Color = clRed;
-                                Panel14->Caption = "ошибка чтения";
+                                Panel14->Caption = "РѕС€РёР±РєР° С‡С‚РµРЅРёСЏ";
                                 continue;
                         }
                 }
 
                 else {
                         Panel14->Font->Color = clRed;
-                        Panel14->Caption = "буфер пуст";
+                        Panel14->Caption = "Р±СѓС„РµСЂ РїСѓСЃС‚";
                         continue;
                 } 
         
@@ -262,7 +262,7 @@ void __fastcall TForm1::GetInfoFT2(unsigned char *pData,
         while (!Loop_Break_1);
 }
 
-// запись в плату ФПУ -------------------------------------------------------
+// Р·Р°РїРёСЃСЊ РІ РїР»Р°С‚Сѓ Р¤РџРЈ -------------------------------------------------------
 void __fastcall TForm1::WriteFT2(AnsiString Ind,
                                  LPVOID lpBuffer,
 		                 DWORD dwBytesToWrite)
@@ -280,7 +280,7 @@ void __fastcall TForm1::WriteFT2(AnsiString Ind,
         }
 }
 
-// инициализация ФПУ --------------------------------------------------------
+// РёРЅРёС†РёР°Р»РёР·Р°С†РёСЏ Р¤РџРЈ --------------------------------------------------------
 void __fastcall TForm1::Button8Click(TObject *Sender)
 {
         FPU_Name = FPU_Name1;
@@ -290,7 +290,7 @@ void __fastcall TForm1::Button8Click(TObject *Sender)
                            FT_OPEN_BY_SERIAL_NUMBER,
                            &ftHandle_FPU);
                            
-        FTStatFPU("ФПУ подключено");
+        FTStatFPU("Р¤РџРЈ РїРѕРґРєР»СЋС‡РµРЅРѕ");
         
         if (ftStatus_FPU != FT_OK) {
                 FPU_Name = FPU_Name2;
@@ -298,18 +298,18 @@ void __fastcall TForm1::Button8Click(TObject *Sender)
                         FT_OpenEx((void*)FPU_Name.c_str(),
                                    FT_OPEN_BY_SERIAL_NUMBER,
                                    &ftHandle_FPU);
-                FTStatFPU("ФПУ OK");
+                FTStatFPU("Р¤РџРЈ OK");
         }
         
         if (ftStatus_FPU != FT_OK) {
 
-                Application->MessageBoxA("Подключите ФПУ", "", MB_OK);
+                Application->MessageBoxA("РџРѕРґРєР»СЋС‡РёС‚Рµ Р¤РџРЈ", "", MB_OK);
                 return;
         }
 
         Panel16->Caption = FPU_Name;
 
-        // Задаем формат данных
+        // Р—Р°РґР°РµРј С„РѕСЂРјР°С‚ РґР°РЅРЅС‹С…
         ftStatus_FPU =
                 FT_SetDataCharacteristics(ftHandle_FPU,
                                           FT_BITS_8,
@@ -318,11 +318,11 @@ void __fastcall TForm1::Button8Click(TObject *Sender)
                                           
         if(ftStatus_FPU != FT_OK) {
                 Panel14->Font->Color = clRed;
-                Panel14->Caption = "Ошибка параметров ФПУ";
+                Panel14->Caption = "РћС€РёР±РєР° РїР°СЂР°РјРµС‚СЂРѕРІ Р¤РџРЈ";
                 return;
         }
 
-        // Задаем скорость порта ФПУ
+        // Р—Р°РґР°РµРј СЃРєРѕСЂРѕСЃС‚СЊ РїРѕСЂС‚Р° Р¤РџРЈ
         ftStatus_FPU =
                 FT_SetBaudRate(ftHandle_FPU,
                                StrToInt(FPU_Name));
@@ -333,30 +333,30 @@ void __fastcall TForm1::Button8Click(TObject *Sender)
                 return;
         }    
 
-        // Очищаем FT2   
+        // РћС‡РёС‰Р°РµРј FT2   
         ftStatus_FPU =
                 FT_Purge(ftHandle_FPU, FT_PURGE_RX | FT_PURGE_TX); 
         if (ftStatus_FPU != FT_OK) {
                 Panel14->Font->Color = clRed;
-                Panel14->Caption = "ошибка очистки";
+                Panel14->Caption = "РѕС€РёР±РєР° РѕС‡РёСЃС‚РєРё";
         }
 }
 
-// сбрасываем ФПУ -----------------------------------------------------------
+// СЃР±СЂР°СЃС‹РІР°РµРј Р¤РџРЈ -----------------------------------------------------------
 void __fastcall TForm1::Button11Click(TObject *Sender)
 {
        ftStatus_FPU = FT_ResetDevice(ftHandle_FPU);
-       FTStatFPU("ФПУ сброшено");
+       FTStatFPU("Р¤РџРЈ СЃР±СЂРѕС€РµРЅРѕ");
 }
 
-// закрываем порт ФПУ -------------------------------------------------------
+// Р·Р°РєСЂС‹РІР°РµРј РїРѕСЂС‚ Р¤РџРЈ -------------------------------------------------------
 void __fastcall TForm1::Button12Click(TObject *Sender)
 {
        ftStatus_FPU = FT_Close(ftHandle_FPU);
-       FTStatFPU("ФПУ закрыто");
+       FTStatFPU("Р¤РџРЈ Р·Р°РєСЂС‹С‚Рѕ");
 }        
 
-// контроль состояния порта платы контроллера -------------------------------
+// РєРѕРЅС‚СЂРѕР»СЊ СЃРѕСЃС‚РѕСЏРЅРёСЏ РїРѕСЂС‚Р° РїР»Р°С‚С‹ РєРѕРЅС‚СЂРѕР»Р»РµСЂР° -------------------------------
 void __fastcall TForm1::FTStatContr1(AnsiString Ind)
 {
 
@@ -371,16 +371,16 @@ void __fastcall TForm1::FTStatContr1(AnsiString Ind)
                 switch (ftStatus_Contrl) {
                 
                         case FT_INVALID_HANDLE:
-                                Indicator1 = "неверный дескриптор";
+                                Indicator1 = "РЅРµРІРµСЂРЅС‹Р№ РґРµСЃРєСЂРёРїС‚РѕСЂ";
                                 break;
                         case FT_DEVICE_NOT_FOUND:
-                                Indicator1 = "устройство не найдено";
+                                Indicator1 = "СѓСЃС‚СЂРѕР№СЃС‚РІРѕ РЅРµ РЅР°Р№РґРµРЅРѕ";
                                 break;
                         case FT_DEVICE_NOT_OPENED:
-                                Indicator1 = "невозможно открыть";
+                                Indicator1 = "РЅРµРІРѕР·РјРѕР¶РЅРѕ РѕС‚РєСЂС‹С‚СЊ";
                                 break;
                         default:
-                                Indicator1 = "ошибка открытия";
+                                Indicator1 = "РѕС€РёР±РєР° РѕС‚РєСЂС‹С‚РёСЏ";
                                 break;
                 }
         }
@@ -388,7 +388,7 @@ void __fastcall TForm1::FTStatContr1(AnsiString Ind)
         Panel29->Caption = Indicator1;
 }
 
-// получение информации от платы контроллера --------------------------------
+// РїРѕР»СѓС‡РµРЅРёРµ РёРЅС„РѕСЂРјР°С†РёРё РѕС‚ РїР»Р°С‚С‹ РєРѕРЅС‚СЂРѕР»Р»РµСЂР° --------------------------------
 void __fastcall TForm1::GetInfoFT1(unsigned char *pData,
                                    DWORD ToRead)
 {
@@ -401,13 +401,13 @@ void __fastcall TForm1::GetInfoFT1(unsigned char *pData,
                 /*
                 if (i>TryToRead) {
                         Panel29->Font->Color = clRed;
-                        Panel29->Caption = "Превышен интервал чтения";
+                        Panel29->Caption = "РџСЂРµРІС‹С€РµРЅ РёРЅС‚РµСЂРІР°Р» С‡С‚РµРЅРёСЏ";
                         break;
                 }     */
 
                 //Sleep(SleepInterv);
 
-                // проверяем приёмный буфер на наличие данных
+                // РїСЂРѕРІРµСЂСЏРµРј РїСЂРёС‘РјРЅС‹Р№ Р±СѓС„РµСЂ РЅР° РЅР°Р»РёС‡РёРµ РґР°РЅРЅС‹С…
                 FT_GetQueueStatus(ftHandle_Contrl,&RxBytes);
 
                 Application->ProcessMessages(); 
@@ -422,14 +422,14 @@ void __fastcall TForm1::GetInfoFT1(unsigned char *pData,
 
                         if (ftStatus_Contrl != FT_OK) {
                                 Panel29->Font->Color = clRed;
-                                Panel29->Caption = "ошибка чтения";
+                                Panel29->Caption = "РѕС€РёР±РєР° С‡С‚РµРЅРёСЏ";
                                 continue;
                         }
                 }
 
                 else {      
                         Panel29->Font->Color = clRed;
-                        Panel29->Caption = "буфер пуст";
+                        Panel29->Caption = "Р±СѓС„РµСЂ РїСѓСЃС‚";
                         continue;
                 } 
         
@@ -440,7 +440,7 @@ void __fastcall TForm1::GetInfoFT1(unsigned char *pData,
         while (!Loop_Break_1);
 }
 
-// запись в плату контроллера -----------------------------------------------
+// Р·Р°РїРёСЃСЊ РІ РїР»Р°С‚Сѓ РєРѕРЅС‚СЂРѕР»Р»РµСЂР° -----------------------------------------------
 void __fastcall TForm1::WriteFT1(AnsiString Ind,
                                  LPVOID lpBuffer,
                                  DWORD dwBytesToWrite)
@@ -459,7 +459,7 @@ void __fastcall TForm1::WriteFT1(AnsiString Ind,
         }
 }
 
-// инициализация платы контроллера ------------------------------------------
+// РёРЅРёС†РёР°Р»РёР·Р°С†РёСЏ РїР»Р°С‚С‹ РєРѕРЅС‚СЂРѕР»Р»РµСЂР° ------------------------------------------
 void __fastcall TForm1::Button2Click(TObject *Sender)
 {
         Controller_Name = Controller_Name1;
@@ -469,7 +469,7 @@ void __fastcall TForm1::Button2Click(TObject *Sender)
                           FT_OPEN_BY_SERIAL_NUMBER,
                           &ftHandle_Contrl);
 
-        FTStatContr1("Контроллер подключен");
+        FTStatContr1("РљРѕРЅС‚СЂРѕР»Р»РµСЂ РїРѕРґРєР»СЋС‡РµРЅ");
 
         if (ftStatus_Contrl != FT_OK) {
 
@@ -479,13 +479,13 @@ void __fastcall TForm1::Button2Click(TObject *Sender)
                                   FT_OPEN_BY_SERIAL_NUMBER,
                                   &ftHandle_Contrl);
 
-                FTStatContr1("Контроллер подключен");
+                FTStatContr1("РљРѕРЅС‚СЂРѕР»Р»РµСЂ РїРѕРґРєР»СЋС‡РµРЅ");
         }
 
 
         if (ftStatus_Contrl != FT_OK) {
 
-                Application->MessageBoxA("Подключите контроллер",
+                Application->MessageBoxA("РџРѕРґРєР»СЋС‡РёС‚Рµ РєРѕРЅС‚СЂРѕР»Р»РµСЂ",
                                          "",
                                          MB_OK);
                 return;
@@ -493,7 +493,7 @@ void __fastcall TForm1::Button2Click(TObject *Sender)
 
         Panel15->Caption = Controller_Name;
 
-        // Задаем формат данных
+        // Р—Р°РґР°РµРј С„РѕСЂРјР°С‚ РґР°РЅРЅС‹С…
         ftStatus_Contrl =
                 FT_SetDataCharacteristics(ftHandle_Contrl,
                                           FT_BITS_8,
@@ -503,11 +503,11 @@ void __fastcall TForm1::Button2Click(TObject *Sender)
         if(ftStatus_Contrl != FT_OK) {
 
                 Panel29->Font->Color = clRed;
-                Panel29->Caption = "Ошибка параметров порта платы контроллера";
+                Panel29->Caption = "РћС€РёР±РєР° РїР°СЂР°РјРµС‚СЂРѕРІ РїРѕСЂС‚Р° РїР»Р°С‚С‹ РєРѕРЅС‚СЂРѕР»Р»РµСЂР°";
                 return;
         }
 
-        // Задаем скорость порта контроллера
+        // Р—Р°РґР°РµРј СЃРєРѕСЂРѕСЃС‚СЊ РїРѕСЂС‚Р° РєРѕРЅС‚СЂРѕР»Р»РµСЂР°
         ftStatus_Contrl =
                 FT_SetBaudRate(ftHandle_Contrl,
                                115200);
@@ -519,36 +519,36 @@ void __fastcall TForm1::Button2Click(TObject *Sender)
                 return;
         } 
 
-        // Очищаем FT1
+        // РћС‡РёС‰Р°РµРј FT1
         ftStatus_Contrl = FT_Purge(ftHandle_Contrl,
                                    FT_PURGE_RX | FT_PURGE_TX);
         if (ftStatus_Contrl != FT_OK) {
                 Panel29->Font->Color = clRed;
-                Panel29->Caption = "ошибка очистки";
+                Panel29->Caption = "РѕС€РёР±РєР° РѕС‡РёСЃС‚РєРё";
         }
 }
 
-// сброс платы контроллера --------------------------------------------------
+// СЃР±СЂРѕСЃ РїР»Р°С‚С‹ РєРѕРЅС‚СЂРѕР»Р»РµСЂР° --------------------------------------------------
 void __fastcall TForm1::Button7Click(TObject *Sender)
 {
        ftStatus_Contrl = FT_ResetDevice(ftHandle_Contrl);
-       FTStatContr1("Контроллер сброшен");
+       FTStatContr1("РљРѕРЅС‚СЂРѕР»Р»РµСЂ СЃР±СЂРѕС€РµРЅ");
 }
 
-// закрытие платы контроллера -----------------------------------------------
+// Р·Р°РєСЂС‹С‚РёРµ РїР»Р°С‚С‹ РєРѕРЅС‚СЂРѕР»Р»РµСЂР° -----------------------------------------------
 void __fastcall TForm1::Button1Click(TObject *Sender)
 {
        ftStatus_Contrl = FT_Close(ftHandle_Contrl);
-       FTStatContr1("Контроллер закрыт");
+       FTStatContr1("РљРѕРЅС‚СЂРѕР»Р»РµСЂ Р·Р°РєСЂС‹С‚");
 }
 
-// выход из зацикливания ----------------------------------------------------
+// РІС‹С…РѕРґ РёР· Р·Р°С†РёРєР»РёРІР°РЅРёСЏ ----------------------------------------------------
 void __fastcall TForm1::Button6Click(TObject *Sender)
 {
        Loop_Break_1 = true;
 }
 
-// выбор частоты ------------------------------------------------------------
+// РІС‹Р±РѕСЂ С‡Р°СЃС‚РѕС‚С‹ ------------------------------------------------------------
 void __fastcall TForm1::ScrollBar2Change(TObject *Sender)
 {
 
@@ -560,7 +560,7 @@ void __fastcall TForm1::ScrollBar2Change(TObject *Sender)
         }
 }
 
-// установка частоты без нажатия кнопки "установить" ------------------------
+// СѓСЃС‚Р°РЅРѕРІРєР° С‡Р°СЃС‚РѕС‚С‹ Р±РµР· РЅР°Р¶Р°С‚РёСЏ РєРЅРѕРїРєРё "СѓСЃС‚Р°РЅРѕРІРёС‚СЊ" ------------------------
 void __fastcall TForm1::CheckBox7Click(TObject *Sender)
 {
         if (CheckBox7->Checked) {
@@ -570,94 +570,94 @@ void __fastcall TForm1::CheckBox7Click(TObject *Sender)
         else Button5->Enabled = true;
 }
 
-// установить частоту -------------------------------------------------------
+// СѓСЃС‚Р°РЅРѕРІРёС‚СЊ С‡Р°СЃС‚РѕС‚Сѓ -------------------------------------------------------
 void __fastcall TForm1::Button5Click(TObject *Sender)
 {
-        // 1. Очищаем FT1
+        // 1. РћС‡РёС‰Р°РµРј FT1
         ftStatus_Contrl = FT_Purge(ftHandle_Contrl,
                                    FT_PURGE_RX | FT_PURGE_TX); 
         if (ftStatus_Contrl != FT_OK) {
                 Panel29->Font->Color = clRed;
-                Panel29->Caption = "ошибка очистки";
+                Panel29->Caption = "РѕС€РёР±РєР° РѕС‡РёСЃС‚РєРё";
                 return;
         }
 
-        // 2. Отправляем команду
+        // 2. РћС‚РїСЂР°РІР»СЏРµРј РєРѕРјР°РЅРґСѓ
         freq_set[0] = Sync_Freq;
         freq_set[1] = (uchar)(freq_s&0x00FF);
         freq_set[2] = (uchar)((freq_s/256)&0x0F);
 
-        WriteFT1("Ошибка записи", freq_set, sizeof(freq_set));
+        WriteFT1("РћС€РёР±РєР° Р·Р°РїРёСЃРё", freq_set, sizeof(freq_set));
 }
 
-// запрос (контроль) текущей частоты в MCU ----------------------------------
+// Р·Р°РїСЂРѕСЃ (РєРѕРЅС‚СЂРѕР»СЊ) С‚РµРєСѓС‰РµР№ С‡Р°СЃС‚РѕС‚С‹ РІ MCU ----------------------------------
 void __fastcall TForm1::Panel4Click(TObject *Sender)
 {
-        // 1. Очищаем FT1
+        // 1. РћС‡РёС‰Р°РµРј FT1
         ftStatus_Contrl = FT_Purge(ftHandle_Contrl,
                                    FT_PURGE_RX | FT_PURGE_TX);
         if (ftStatus_Contrl != FT_OK) {
                 Panel29->Font->Color = clRed;
-                Panel29->Caption = "ошибка очистки";
+                Panel29->Caption = "РѕС€РёР±РєР° РѕС‡РёСЃС‚РєРё";
                 return;
         }
 
-        // 2. Отправляем запрос частоты
+        // 2. РћС‚РїСЂР°РІР»СЏРµРј Р·Р°РїСЂРѕСЃ С‡Р°СЃС‚РѕС‚С‹
         Param_Req[0] = Sync_Req;
         Param_Req[1] = Freq_Req;
 
-        WriteFT1("Ошибка записи",
+        WriteFT1("РћС€РёР±РєР° Р·Р°РїРёСЃРё",
                  Param_Req,
                  sizeof(Param_Req));
         
-        // 3. Получаем информацию
+        // 3. РџРѕР»СѓС‡Р°РµРј РёРЅС„РѕСЂРјР°С†РёСЋ
         GetInfoFT1(freq_get, sizeof(freq_get));
                     
-        // 4. Проверяем синхробайт кадра
+        // 4. РџСЂРѕРІРµСЂСЏРµРј СЃРёРЅС…СЂРѕР±Р°Р№С‚ РєР°РґСЂР°
         if (freq_get[0] != Sync_Freq) {
                 Panel29->Font->Color = clRed;
-                Panel29->Caption = "Ошибка кадра";
+                Panel29->Caption = "РћС€РёР±РєР° РєР°РґСЂР°";
                 return;
         }
 
-        // 5. Утилизируем данные 
+        // 5. РЈС‚РёР»РёР·РёСЂСѓРµРј РґР°РЅРЅС‹Рµ 
         freq_fact = (WORD)(freq_get[1]&0xFF)+(WORD)(freq_get[2]&0x0F)*256;
 
         Panel4->Caption = IntToStr(freq_fact) + " MHz";          
 }
 
-// запрос (контроль) текущего уровня синтезатора в MCU ----------------------
+// Р·Р°РїСЂРѕСЃ (РєРѕРЅС‚СЂРѕР»СЊ) С‚РµРєСѓС‰РµРіРѕ СѓСЂРѕРІРЅСЏ СЃРёРЅС‚РµР·Р°С‚РѕСЂР° РІ MCU ----------------------
 void __fastcall TForm1::Panel35Click(TObject *Sender)
 {           
-        // 1. Очищаем FT1
+        // 1. РћС‡РёС‰Р°РµРј FT1
         ftStatus_Contrl = FT_Purge(ftHandle_Contrl,
                                    FT_PURGE_RX | FT_PURGE_TX);
         if (ftStatus_Contrl != FT_OK) {
                 Panel29->Font->Color = clRed;
-                Panel29->Caption = "ошибка очистки";
+                Panel29->Caption = "РѕС€РёР±РєР° РѕС‡РёСЃС‚РєРё";
                 return;
         }
 
-        // 2. Отправляем запрос состояния выхода
+        // 2. РћС‚РїСЂР°РІР»СЏРµРј Р·Р°РїСЂРѕСЃ СЃРѕСЃС‚РѕСЏРЅРёСЏ РІС‹С…РѕРґР°
         Param_Req[0] = Sync_Req;
         Param_Req[1] = Ampl_Req;
 
-        WriteFT1("Ошибка записи",
+        WriteFT1("РћС€РёР±РєР° Р·Р°РїРёСЃРё",
                  Param_Req,
                  sizeof(Param_Req));
 
-        // 3. Получаем информацию
+        // 3. РџРѕР»СѓС‡Р°РµРј РёРЅС„РѕСЂРјР°С†РёСЋ
         GetInfoFT1(pow_get,
                    sizeof(pow_get));
                     
-        // 4. Проверяем синхробайт кадра
+        // 4. РџСЂРѕРІРµСЂСЏРµРј СЃРёРЅС…СЂРѕР±Р°Р№С‚ РєР°РґСЂР°
         if (pow_get[0] != Sync_Pow) {
                 Panel29->Font->Color = clRed;
-                Panel29->Caption = "Ошибка кадра";
+                Panel29->Caption = "РћС€РёР±РєР° РєР°РґСЂР°";
                 return;
         }
 
-        // 5. Утилизируем данные 
+        // 5. РЈС‚РёР»РёР·РёСЂСѓРµРј РґР°РЅРЅС‹Рµ 
         pow_fact = pow_get[1];
       
         switch (pow_fact) {
@@ -676,7 +676,7 @@ void __fastcall TForm1::Panel35Click(TObject *Sender)
         }                         
 }
 
-// RF on/off (вкл./выкл. выход синтезатора) ---------------------------------
+// RF on/off (РІРєР»./РІС‹РєР». РІС‹С…РѕРґ СЃРёРЅС‚РµР·Р°С‚РѕСЂР°) ---------------------------------
 void __fastcall TForm1::Button22Click(TObject *Sender)
 {                       
         pow_set[0] = Sync_Pow;
@@ -696,21 +696,21 @@ void __fastcall TForm1::Button22Click(TObject *Sender)
                         break;
         }
 
-        // 1. Очищаем FT1
+        // 1. РћС‡РёС‰Р°РµРј FT1
         ftStatus_Contrl = FT_Purge(ftHandle_Contrl,
                                    FT_PURGE_RX | FT_PURGE_TX);  
         if (ftStatus_Contrl != FT_OK) {
                 Panel29->Font->Color = clRed;
-                Panel29->Caption = "ошибка очистки";
+                Panel29->Caption = "РѕС€РёР±РєР° РѕС‡РёСЃС‚РєРё";
                 return;
         }
         
-        // 2. Отправляем команду
-        WriteFT1("Ошибка записи",
+        // 2. РћС‚РїСЂР°РІР»СЏРµРј РєРѕРјР°РЅРґСѓ
+        WriteFT1("РћС€РёР±РєР° Р·Р°РїРёСЃРё",
                  pow_set,
                  sizeof(pow_set));
                   
-        // 3. Индицируем
+        // 3. РРЅРґРёС†РёСЂСѓРµРј
         pow_fact = pow_set[1];
       
         switch (pow_fact) {
@@ -734,7 +734,7 @@ void __fastcall TForm1::Button22Click(TObject *Sender)
 
 }
 
-// Модуляция вкл/выкл -------------------------------------------------------
+// РњРѕРґСѓР»СЏС†РёСЏ РІРєР»/РІС‹РєР» -------------------------------------------------------
 void __fastcall TForm1::RadioGroup3Click(TObject *Sender)
 {                                                         
         switch (RadioGroup3->ItemIndex) {
@@ -753,36 +753,36 @@ void __fastcall TForm1::RadioGroup3Click(TObject *Sender)
                 case 1:
                         ScrollBar4->Enabled = false;
                         modul_set[1] = modul_off_1;
-                        Panel5->Caption = "Выкл.1";
+                        Panel5->Caption = "Р’С‹РєР».1";
                         goto wrt;
 
                 case 2:
                         ScrollBar4->Enabled = false;
                         modul_set[1] = modul_off_0;
-                        Panel5->Caption = "Выкл.0";
+                        Panel5->Caption = "Р’С‹РєР».0";
                         goto wrt;
         }
 
         return;
 
 wrt:
-        // 1. Очищаем FT1
+        // 1. РћС‡РёС‰Р°РµРј FT1
         ftStatus_Contrl = FT_Purge(ftHandle_Contrl,
                                    FT_PURGE_RX | FT_PURGE_TX); 
         if (ftStatus_Contrl != FT_OK) {
                 Panel29->Font->Color = clRed;
-                Panel29->Caption = "ошибка очистки";
+                Panel29->Caption = "РѕС€РёР±РєР° РѕС‡РёСЃС‚РєРё";
                 return;
         }
          
-        // 2. Отправляем команду
+        // 2. РћС‚РїСЂР°РІР»СЏРµРј РєРѕРјР°РЅРґСѓ
         modul_set[0] = Sync_Modul;
-        WriteFT1("Ошибка записи",
+        WriteFT1("РћС€РёР±РєР° Р·Р°РїРёСЃРё",
                  modul_set,
                  sizeof(modul_set));  
 }
 
-// Модуляция (частота) ------------------------------------------------------
+// РњРѕРґСѓР»СЏС†РёСЏ (С‡Р°СЃС‚РѕС‚Р°) ------------------------------------------------------
 void __fastcall TForm1::ScrollBar4Change(TObject *Sender)
 {
         modul_Bar = ScrollBar4->Position;
@@ -790,89 +790,89 @@ void __fastcall TForm1::ScrollBar4Change(TObject *Sender)
         if (modul_Bar <= 9) {
 
                 modul_s = 0x10 + modul_Bar;
-                Panel5->Caption = IntToStr(modul_Bar*100) + " Гц";
+                Panel5->Caption = IntToStr(modul_Bar*100) + " Р“С†";
         }
 
         if (modul_Bar > 9 && modul_Bar <= 18) {
 
                 modul_s = 0x20+modul_Bar-9;
-                Panel5->Caption = IntToStr(modul_Bar-9) + " кГц";
+                Panel5->Caption = IntToStr(modul_Bar-9) + " РєР“С†";
         }
 
         if (modul_Bar == 19) {
 
                 modul_s = 0x41;
-                Panel5->Caption = "10 кГц";
+                Panel5->Caption = "10 РєР“С†";
         }
 
-        // 1. Очищаем FT1
+        // 1. РћС‡РёС‰Р°РµРј FT1
         ftStatus_Contrl = FT_Purge(ftHandle_Contrl,
                                    FT_PURGE_RX | FT_PURGE_TX);
         if (ftStatus_Contrl != FT_OK) {
                 Panel29->Font->Color = clRed;
-                Panel29->Caption = "ошибка очистки";
+                Panel29->Caption = "РѕС€РёР±РєР° РѕС‡РёСЃС‚РєРё";
                 return;
         }
 
-        // 2. Отправляем команду
+        // 2. РћС‚РїСЂР°РІР»СЏРµРј РєРѕРјР°РЅРґСѓ
         modul_set[0] = Sync_Modul;
         modul_set[1] = modul_s;
-        WriteFT1("Ошибка записи",
+        WriteFT1("РћС€РёР±РєР° Р·Р°РїРёСЃРё",
                  modul_set,
                  sizeof(modul_set));  
 } 
 
-// Модуляция (запрос параметров) --------------------------------------------
+// РњРѕРґСѓР»СЏС†РёСЏ (Р·Р°РїСЂРѕСЃ РїР°СЂР°РјРµС‚СЂРѕРІ) --------------------------------------------
 void __fastcall TForm1::Panel13Click(TObject *Sender)
 {
-        // 1. Очищаем FT1
+        // 1. РћС‡РёС‰Р°РµРј FT1
         ftStatus_Contrl = FT_Purge(ftHandle_Contrl,
                                    FT_PURGE_RX | FT_PURGE_TX); 
         if (ftStatus_Contrl != FT_OK) {
                 Panel29->Font->Color = clRed;
-                Panel29->Caption = "ошибка очистки";
+                Panel29->Caption = "РѕС€РёР±РєР° РѕС‡РёСЃС‚РєРё";
                 return;
         }
 
-        // 2. Отправляем запрос информации о параметрах модуляции
+        // 2. РћС‚РїСЂР°РІР»СЏРµРј Р·Р°РїСЂРѕСЃ РёРЅС„РѕСЂРјР°С†РёРё Рѕ РїР°СЂР°РјРµС‚СЂР°С… РјРѕРґСѓР»СЏС†РёРё
         Param_Req[0] = Sync_Req;
         Param_Req[1] = Modul_Req;
 
-        WriteFT1("Ошибка записи",
+        WriteFT1("РћС€РёР±РєР° Р·Р°РїРёСЃРё",
                  Param_Req,
                  sizeof(Param_Req));
 
-        // 3. Получаем информацию
+        // 3. РџРѕР»СѓС‡Р°РµРј РёРЅС„РѕСЂРјР°С†РёСЋ
         GetInfoFT1(modul_get,
                    sizeof(modul_get));
 
-        // 4. Проверяем синхробайт кадра
+        // 4. РџСЂРѕРІРµСЂСЏРµРј СЃРёРЅС…СЂРѕР±Р°Р№С‚ РєР°РґСЂР°
         if (modul_get[0] != Sync_Modul) {
                 Panel29->Font->Color = clRed;
-                Panel29->Caption = "Ошибка кадра";
+                Panel29->Caption = "РћС€РёР±РєР° РєР°РґСЂР°";
                 return;
         }
 
-        // 5. Утилизируем данные
+        // 5. РЈС‚РёР»РёР·РёСЂСѓРµРј РґР°РЅРЅС‹Рµ
         modul_fact = modul_get[1];
 
         switch (modul_fact) {
 
                 case modul_off_1:
-                        Panel13->Caption = "Выкл.1";
+                        Panel13->Caption = "Р’С‹РєР».1";
                         break;
 
                 case modul_off_0:
-                        Panel13->Caption = "Выкл.0";
+                        Panel13->Caption = "Р’С‹РєР».0";
                         break;
 
                 case modul_on:
-                        Panel13->Caption = "Вкл.";
+                        Panel13->Caption = "Р’РєР».";
                         break;
         }
 }  
 
-// Контроль всех параметров -------------------------------------------------
+// РљРѕРЅС‚СЂРѕР»СЊ РІСЃРµС… РїР°СЂР°РјРµС‚СЂРѕРІ -------------------------------------------------
 void __fastcall TForm1::Button3Click(TObject *Sender)
 {
         Panel4Click(Sender);
@@ -880,7 +880,7 @@ void __fastcall TForm1::Button3Click(TObject *Sender)
         Panel13Click(Sender);
 } 
 
-// Нижняя частота измерений Fн ----------------------------------------------
+// РќРёР¶РЅСЏСЏ С‡Р°СЃС‚РѕС‚Р° РёР·РјРµСЂРµРЅРёР№ FРЅ ----------------------------------------------
 void __fastcall TForm1::ScrollBar6Change(TObject *Sender)
 {
         ScrollBar6->Position = ((ScrollBar6->Position)/50)*50;
@@ -898,12 +898,12 @@ void __fastcall TForm1::ScrollBar6Change(TObject *Sender)
         Freq = (StartFreq+StopFreq)/2;
         ScrollBar2->Position = Freq;
 
-        // кол-во точек
+        // РєРѕР»-РІРѕ С‚РѕС‡РµРє
         points_numb = (StopFreq - StartFreq)/FreqStep + 1;
         Panel31->Caption = points_numb;
 }
 
-// Верхняя частота измерений Fв ---------------------------------------------
+// Р’РµСЂС…РЅСЏСЏ С‡Р°СЃС‚РѕС‚Р° РёР·РјРµСЂРµРЅРёР№ FРІ ---------------------------------------------
 void __fastcall TForm1::ScrollBar7Change(TObject *Sender)
 {
         ScrollBar7->Position = ((ScrollBar7->Position)/50)*50;
@@ -921,24 +921,24 @@ void __fastcall TForm1::ScrollBar7Change(TObject *Sender)
         Freq = (StartFreq+StopFreq)/2;
         ScrollBar2->Position = Freq;
 
-        // кол-во точек
+        // РєРѕР»-РІРѕ С‚РѕС‡РµРє
         points_numb = (StopFreq - StartFreq)/FreqStep + 1;
         Panel31->Caption = points_numb;
 }
 
-// Частотный шаг ------------------------------------------------------------
+// Р§Р°СЃС‚РѕС‚РЅС‹Р№ С€Р°Рі ------------------------------------------------------------
 void __fastcall TForm1::ScrollBar1Change(TObject *Sender)
 {             
         ScrollBar1->Position = ((ScrollBar1->Position)/5)*5;
         FreqStep = ScrollBar1->Position;
         Panel32->Caption = FreqStep;
 
-        // кол-во точек
+        // РєРѕР»-РІРѕ С‚РѕС‡РµРє
         points_numb = (StopFreq - StartFreq)/FreqStep + 1;
         Panel31->Caption = points_numb;
 }
 
-// Отображение точек вкл./выкл. ---------------------------------------------
+// РћС‚РѕР±СЂР°Р¶РµРЅРёРµ С‚РѕС‡РµРє РІРєР»./РІС‹РєР». ---------------------------------------------
 void __fastcall TForm1::CheckBox4Click(TObject *Sender)
 {
         if (CheckBox4->Checked) {
@@ -952,7 +952,7 @@ void __fastcall TForm1::CheckBox4Click(TObject *Sender)
         Series1->Pointer->Visible = points_check_on;
 } 
 
-// Стиль точек --------------------------------------------------------------
+// РЎС‚РёР»СЊ С‚РѕС‡РµРє --------------------------------------------------------------
 void __fastcall TForm1::TrackBar1Change(TObject *Sender)
 {
 
@@ -1001,7 +1001,7 @@ void __fastcall TForm1::TrackBar1Change(TObject *Sender)
         }
 }
 
-// Размер точек -------------------------------------------------------------
+// Р Р°Р·РјРµСЂ С‚РѕС‡РµРє -------------------------------------------------------------
 void __fastcall TForm1::TrackBar2Change(TObject *Sender)
 {
         points_size = TrackBar2->Position;
@@ -1011,7 +1011,7 @@ void __fastcall TForm1::TrackBar2Change(TObject *Sender)
         Series1->Pointer->VertSize = points_size;
 }
 
-// Цвет точек ---------------------------------------------------------------
+// Р¦РІРµС‚ С‚РѕС‡РµРє ---------------------------------------------------------------
 void __fastcall TForm1::TrackBar3Change(TObject *Sender)
 {
 
@@ -1066,7 +1066,7 @@ void __fastcall TForm1::TrackBar3Change(TObject *Sender)
         Panel9->Color = points_col_full;                        
 }
 
-// Толщина линии ------------------------------------------------------------
+// РўРѕР»С‰РёРЅР° Р»РёРЅРёРё ------------------------------------------------------------
 void __fastcall TForm1::TrackBar4Change(TObject *Sender)
 {
         line_width = TrackBar4->Position;
@@ -1075,7 +1075,7 @@ void __fastcall TForm1::TrackBar4Change(TObject *Sender)
         Series1->LinePen->Width = line_width;
 }
 
-// Цвет линии ---------------------------------------------------------------
+// Р¦РІРµС‚ Р»РёРЅРёРё ---------------------------------------------------------------
 void __fastcall TForm1::TrackBar5Change(TObject *Sender)
 {
 
@@ -1134,7 +1134,7 @@ void __fastcall TForm1::TrackBar5Change(TObject *Sender)
         }
 }
 
-// Цвет фона ----------------------------------------------------------------
+// Р¦РІРµС‚ С„РѕРЅР° ----------------------------------------------------------------
 void __fastcall TForm1::TrackBar6Change(TObject *Sender)
 {
 
@@ -1189,7 +1189,7 @@ void __fastcall TForm1::TrackBar6Change(TObject *Sender)
         Panel43->Color = background_col_full;
 }
 
-// Графические шаблоны ------------------------------------------------------
+// Р“СЂР°С„РёС‡РµСЃРєРёРµ С€Р°Р±Р»РѕРЅС‹ ------------------------------------------------------
 void __fastcall TForm1::RadioGroup4Click(TObject *Sender)
 {
 
@@ -1242,7 +1242,7 @@ void __fastcall TForm1::RadioGroup4Click(TObject *Sender)
         }   
 }
 
-// Очистка отображаемой информации ------------------------------------------
+// РћС‡РёСЃС‚РєР° РѕС‚РѕР±СЂР°Р¶Р°РµРјРѕР№ РёРЅС„РѕСЂРјР°С†РёРё ------------------------------------------
 void __fastcall TForm1::Button23Click(TObject *Sender)
 {
 
@@ -1262,7 +1262,7 @@ void __fastcall TForm1::Button23Click(TObject *Sender)
         Series1->Clear();        
 }
 
-// Открыть АЧХ --------------------------------------------------------------
+// РћС‚РєСЂС‹С‚СЊ РђР§РҐ --------------------------------------------------------------
 void __fastcall TForm1::Button29Click(TObject *Sender)
 {
 
@@ -1270,10 +1270,10 @@ void __fastcall TForm1::Button29Click(TObject *Sender)
 
                 char* FileIn=(OpenDialog1->FileName).c_str();
 
-                // открываем файл
+                // РѕС‚РєСЂС‹РІР°РµРј С„Р°Р№Р»
                 ifstream in2(FileIn);
 
-                // считываем АЧХ
+                // СЃС‡РёС‚С‹РІР°РµРј РђР§РҐ
                 points_graph1 = 0;
 
                 do {
@@ -1295,7 +1295,7 @@ void __fastcall TForm1::Button29Click(TObject *Sender)
                 Chart1->BottomAxis->Maximum = freq_[points_graph1-1];
                 Chart1->BottomAxis->Minimum = freq_[0];
 
-                // выводим на график
+                // РІС‹РІРѕРґРёРј РЅР° РіСЂР°С„РёРє
                 maxafr = 0;
                 minafr = 4100;
                 flatness = 0;
@@ -1311,27 +1311,27 @@ void __fastcall TForm1::Button29Click(TObject *Sender)
                         if (minafr==0) minafr = 1; 
                 }
 
-                // неравномерность в дБ
+                // РЅРµСЂР°РІРЅРѕРјРµСЂРЅРѕСЃС‚СЊ РІ РґР‘
                 flatness = 10*log10(maxafr/minafr);
 
-                // выводим информацию
+                // РІС‹РІРѕРґРёРј РёРЅС„РѕСЂРјР°С†РёСЋ
                 Panel47->Caption = FormatFloat("###0.0",flatness);
                 Panel48->Caption = FormatFloat("###0.0",maxafr);
                 Panel49->Caption = FormatFloat("###0.0",minafr);
         }
 }
 
-// Сохранить АЧХ ------------------------------------------------------------
+// РЎРѕС…СЂР°РЅРёС‚СЊ РђР§РҐ ------------------------------------------------------------
 void __fastcall TForm1::Button28Click(TObject *Sender)
 {
         if(SaveDialog1->Execute()) {
 
                 char* FileOut=(SaveDialog1->FileName).c_str();
 
-                // открываем файл
+                // РѕС‚РєСЂС‹РІР°РµРј С„Р°Р№Р»
                 ofstream out1(FileOut);
 
-                // сохраняем АЧХ
+                // СЃРѕС…СЂР°РЅСЏРµРј РђР§РҐ
                 for (int j=0; j<points_numb; j++) {
 
                         out1 << freq_[j] << '\t' << lev_[j] << endl;
@@ -1346,7 +1346,7 @@ void __fastcall TForm1::Button28Click(TObject *Sender)
         } 
 }
 
-// Открыть тест-АЧХ ---------------------------------------------------------
+// РћС‚РєСЂС‹С‚СЊ С‚РµСЃС‚-РђР§РҐ ---------------------------------------------------------
 void __fastcall TForm1::Button4Click(TObject *Sender)
 {
         points_graph1 = 0;
@@ -1365,7 +1365,7 @@ void __fastcall TForm1::Button4Click(TObject *Sender)
         Chart1->BottomAxis->Maximum = freq_[points_graph1-1];
         Chart1->BottomAxis->Minimum = freq_[0];
 
-        // выводим на график
+        // РІС‹РІРѕРґРёРј РЅР° РіСЂР°С„РёРє
         maxafr = 0;
         minafr = 4100;
         flatness = 0;
@@ -1386,7 +1386,7 @@ void __fastcall TForm1::Button4Click(TObject *Sender)
         Panel49->Caption = FormatFloat("###0.0",minafr); 
 }
 
-// Старт измерений ----------------------------------------------------------
+// РЎС‚Р°СЂС‚ РёР·РјРµСЂРµРЅРёР№ ----------------------------------------------------------
 void __fastcall TForm1::Button27Click(TObject *Sender)
 {
 
@@ -1425,21 +1425,21 @@ void __fastcall TForm1::Button27Click(TObject *Sender)
         ADC_FPU_Get[0] = ADC_FPU_sync;
         ADC_FPU_Get[1] = ADC_FPU_10;
 
-        // Очищаем FT2    
+        // РћС‡РёС‰Р°РµРј FT2    
         ftStatus_FPU =
                 FT_Purge(ftHandle_FPU, FT_PURGE_RX | FT_PURGE_TX);
         if (ftStatus_FPU != FT_OK) {
                 Panel14->Font->Color = clRed;
-                Panel14->Caption = "ошибка очистки";
+                Panel14->Caption = "РѕС€РёР±РєР° РѕС‡РёСЃС‚РєРё";
                 return;
         }
 
-        // Очищаем FT1
+        // РћС‡РёС‰Р°РµРј FT1
         ftStatus_Contrl = FT_Purge(ftHandle_Contrl,
                                    FT_PURGE_RX | FT_PURGE_TX);
         if (ftStatus_Contrl != FT_OK) {
                 Panel29->Font->Color = clRed;
-                Panel29->Caption = "ошибка очистки";
+                Panel29->Caption = "РѕС€РёР±РєР° РѕС‡РёСЃС‚РєРё";
                 return;
         }
 
@@ -1448,9 +1448,9 @@ void __fastcall TForm1::Button27Click(TObject *Sender)
                 CheckBox7->Checked = false;
         }
         
-        do {   // поехали
+        do {   // РїРѕРµС…Р°Р»Рё
 
-                // подсчет времени отработки одной АЧХ (одного кадра)
+                // РїРѕРґСЃС‡РµС‚ РІСЂРµРјРµРЅРё РѕС‚СЂР°Р±РѕС‚РєРё РѕРґРЅРѕР№ РђР§РҐ (РѕРґРЅРѕРіРѕ РєР°РґСЂР°)
                 __int64 start, stop, f;
                 QueryPerformanceCounter((_LARGE_INTEGER*)&start);
                 QueryPerformanceFrequency((_LARGE_INTEGER*)&f);
@@ -1467,28 +1467,28 @@ void __fastcall TForm1::Button27Click(TObject *Sender)
                         ScrollBar2->Position = freq_s;  
 
 
-                        // устанавливаем частоту
+                        // СѓСЃС‚Р°РЅР°РІР»РёРІР°РµРј С‡Р°СЃС‚РѕС‚Сѓ
                         freq_set[0] = Sync_Freq;
                         freq_set[1] = (uchar)(freq_s&0x00FF);
                         freq_set[2] = (uchar)((freq_s/256)&0x0F);
 
-                        // отправляем команду
-                        WriteFT1("Ошибка записи",
+                        // РѕС‚РїСЂР°РІР»СЏРµРј РєРѕРјР°РЅРґСѓ
+                        WriteFT1("РћС€РёР±РєР° Р·Р°РїРёСЃРё",
                                  freq_set,
                                  sizeof(freq_set));
         
 
-                        // Шлём запрос на получение уровня сигнала
-                        WriteFT2("Ошибка записи",
+                        // РЁР»С‘Рј Р·Р°РїСЂРѕСЃ РЅР° РїРѕР»СѓС‡РµРЅРёРµ СѓСЂРѕРІРЅСЏ СЃРёРіРЅР°Р»Р°
+                        WriteFT2("РћС€РёР±РєР° Р·Р°РїРёСЃРё",
                                  ADC_FPU_Get,
                                  sizeof(ADC_FPU_Get));
 
-                        // Считываем 
+                        // РЎС‡РёС‚С‹РІР°РµРј 
                         GetInfoFT2(buf, ADC_FPU_buf_size*3+2);
 
                         Application->ProcessMessages();
 
-                        meas_number = 0;       // кол-во значений
+                        meas_number = 0;       // РєРѕР»-РІРѕ Р·РЅР°С‡РµРЅРёР№
                         mean_value = 0;
 
                         for (int i=0; i<ADC_FPU_buf_size; i++) {
@@ -1498,11 +1498,11 @@ void __fastcall TForm1::Button27Click(TObject *Sender)
                                 meas_number++;
                         }
 
-                        // с фоном
+                        // СЃ С„РѕРЅРѕРј
                         if (CheckBox9->Checked) {
                                 lev_[pn] = mean_value / meas_number;
                         }
-                        // без
+                        // Р±РµР·
                         else {
                                 lev_[pn] = mean_value / meas_number - noise1;
                                 if (lev_[pn]<1) lev_[pn]=1;
@@ -1520,7 +1520,7 @@ void __fastcall TForm1::Button27Click(TObject *Sender)
 
                 flatness = 10*(log10(maxafr/minafr));
 
-                // рисуем
+                // СЂРёСЃСѓРµРј
                 Panel47->Caption = FormatFloat("###0.0",flatness);
                 Panel48->Caption = maxafr;
                 Panel49->Caption = minafr;
@@ -1533,14 +1533,14 @@ void __fastcall TForm1::Button27Click(TObject *Sender)
 
 
                 QueryPerformanceCounter((_LARGE_INTEGER*)&stop);
-                //время в миллисекундах
+                //РІСЂРµРјСЏ РІ РјРёР»Р»РёСЃРµРєСѓРЅРґР°С…
                 double time = 1000*(((double)(stop-start))/(double)f);
                 Panel54->Caption = FormatFloat("###0",time);
         }
         while (!Loop_Break_2); 
 }
 
-// Стоп измерений -----------------------------------------------------------
+// РЎС‚РѕРї РёР·РјРµСЂРµРЅРёР№ -----------------------------------------------------------
 void __fastcall TForm1::Button26Click(TObject *Sender)
 {                        
         Loop_Break_2 = true;
@@ -1560,7 +1560,7 @@ void __fastcall TForm1::Button26Click(TObject *Sender)
         Panel3->Enabled = true;  
 }
 
-// Логарифмич. ось графика вкл./выкл. ---------------------------------------
+// Р›РѕРіР°СЂРёС„РјРёС‡. РѕСЃСЊ РіСЂР°С„РёРєР° РІРєР»./РІС‹РєР». ---------------------------------------
 void __fastcall TForm1::CheckBox2Click(TObject *Sender)
 {
         if (CheckBox2->Checked) {
@@ -1571,7 +1571,7 @@ void __fastcall TForm1::CheckBox2Click(TObject *Sender)
         }
 }
 
-// Отображение значений вкл./выкл.  -----------------------------------------
+// РћС‚РѕР±СЂР°Р¶РµРЅРёРµ Р·РЅР°С‡РµРЅРёР№ РІРєР»./РІС‹РєР».  -----------------------------------------
 void __fastcall TForm1::CheckBox5Click(TObject *Sender)
 {
         if (CheckBox5->Checked) {
@@ -1585,28 +1585,28 @@ void __fastcall TForm1::CheckBox5Click(TObject *Sender)
         Series1->Marks->Visible = marks_check_on;
 }
 
-// Считать уровень фона -----------------------------------------------------
+// РЎС‡РёС‚Р°С‚СЊ СѓСЂРѕРІРµРЅСЊ С„РѕРЅР° -----------------------------------------------------
 void __fastcall TForm1::Button30Click(TObject *Sender)
 {
 
-        // Очищаем FT2    
+        // РћС‡РёС‰Р°РµРј FT2    
         ftStatus_FPU =
                 FT_Purge(ftHandle_FPU, FT_PURGE_RX | FT_PURGE_TX);
         if (ftStatus_FPU != FT_OK) {
                 Panel14->Font->Color = clRed;
-                Panel14->Caption = "ошибка очистки";
+                Panel14->Caption = "РѕС€РёР±РєР° РѕС‡РёСЃС‚РєРё";
                 return;
         }
 
         ADC_FPU_Get[0] = ADC_FPU_sync;
         ADC_FPU_Get[1] = ADC_FPU_10;
 
-        // Шлем запрос
-        WriteFT2("Ошибка записи",
+        // РЁР»РµРј Р·Р°РїСЂРѕСЃ
+        WriteFT2("РћС€РёР±РєР° Р·Р°РїРёСЃРё",
                  ADC_FPU_Get,
                  sizeof(ADC_FPU_Get));
 
-        // Считываем
+        // РЎС‡РёС‚С‹РІР°РµРј
         GetInfoFT2(buf, ADC_FPU_buf_size*3+2);
 
         Application->ProcessMessages();
@@ -1619,24 +1619,24 @@ void __fastcall TForm1::Button30Click(TObject *Sender)
                 noise1 += ADC[i];
                 meas_number++;
         }
-        // среднее из meas_number значений
+        // СЃСЂРµРґРЅРµРµ РёР· meas_number Р·РЅР°С‡РµРЅРёР№
         noise1 /= meas_number;
 
         Panel55->Caption = noise1;
 }
 
-// обнулить фон -------------------------------------------------------------
+// РѕР±РЅСѓР»РёС‚СЊ С„РѕРЅ -------------------------------------------------------------
 void __fastcall TForm1::Button31Click(TObject *Sender)
 {
         noise1 = 0;
         Panel55->Caption = noise1;
 }
 
-// Двойной щелчок по графику ------------------------------------------------
+// Р”РІРѕР№РЅРѕР№ С‰РµР»С‡РѕРє РїРѕ РіСЂР°С„РёРєСѓ ------------------------------------------------
 void __fastcall TForm1::Chart1DblClick(TObject *Sender)
 {
-        // возврат в исходное - готовность
-        // измерять и отображать данные диапазона 600...1100 МГц
+        // РІРѕР·РІСЂР°С‚ РІ РёСЃС…РѕРґРЅРѕРµ - РіРѕС‚РѕРІРЅРѕСЃС‚СЊ
+        // РёР·РјРµСЂСЏС‚СЊ Рё РѕС‚РѕР±СЂР°Р¶Р°С‚СЊ РґР°РЅРЅС‹Рµ РґРёР°РїР°Р·РѕРЅР° 600...1100 РњР“С†
         ScrollBar6->Position = 600;
         ScrollBar6Change(Sender);
         ScrollBar7->Position = 1100;
@@ -1645,25 +1645,25 @@ void __fastcall TForm1::Chart1DblClick(TObject *Sender)
         ScrollBar1Change(Sender);  
 }
 
-// Действия при прокрутке графика -------------------------------------------
+// Р”РµР№СЃС‚РІРёСЏ РїСЂРё РїСЂРѕРєСЂСѓС‚РєРµ РіСЂР°С„РёРєР° -------------------------------------------
 void __fastcall TForm1::Chart1Scroll(TObject *Sender)
 {
-        // Недопущение отображения значений < единицы  
+        // РќРµРґРѕРїСѓС‰РµРЅРёРµ РѕС‚РѕР±СЂР°Р¶РµРЅРёСЏ Р·РЅР°С‡РµРЅРёР№ < РµРґРёРЅРёС†С‹  
         if (Chart1->LeftAxis->Minimum < 1) {
                 Chart1->LeftAxis->Minimum = 1;
         }
 }
 
-// Действия при масштабировании графика -------------------------------------
+// Р”РµР№СЃС‚РІРёСЏ РїСЂРё РјР°СЃС€С‚Р°Р±РёСЂРѕРІР°РЅРёРё РіСЂР°С„РёРєР° -------------------------------------
 void __fastcall TForm1::Chart1Zoom(TObject *Sender)
 {
-        // Недопущение отображения значений < единицы
+        // РќРµРґРѕРїСѓС‰РµРЅРёРµ РѕС‚РѕР±СЂР°Р¶РµРЅРёСЏ Р·РЅР°С‡РµРЅРёР№ < РµРґРёРЅРёС†С‹
         if (Chart1->LeftAxis->Minimum < 1) {
                 Chart1->LeftAxis->Minimum = 1;
         }
 } 
 
-// Переключение вкладок "Измерить" / "График" -------------------------------
+// РџРµСЂРµРєР»СЋС‡РµРЅРёРµ РІРєР»Р°РґРѕРє "РР·РјРµСЂРёС‚СЊ" / "Р“СЂР°С„РёРє" -------------------------------
 void __fastcall TForm1::PageControl1Change(TObject *Sender)
 {
 
@@ -1698,7 +1698,7 @@ void __fastcall TForm1::PageControl1Change(TObject *Sender)
         }           
 }
 
-// свипирование старт -------------------------------------------------------
+// СЃРІРёРїРёСЂРѕРІР°РЅРёРµ СЃС‚Р°СЂС‚ -------------------------------------------------------
 void __fastcall TForm1::Button9Click(TObject *Sender)
 {
 
@@ -1722,12 +1722,12 @@ void __fastcall TForm1::Button9Click(TObject *Sender)
 
         points_graph1 = points_numb;
 
-        // Очищаем FT1
+        // РћС‡РёС‰Р°РµРј FT1
         ftStatus_Contrl = FT_Purge(ftHandle_Contrl,
                                    FT_PURGE_RX | FT_PURGE_TX);   
         if (ftStatus_Contrl != FT_OK) {
                 Panel29->Font->Color = clRed;
-                Panel29->Caption = "ошибка очистки";
+                Panel29->Caption = "РѕС€РёР±РєР° РѕС‡РёСЃС‚РєРё";
                 return;
         }        
 
@@ -1738,7 +1738,7 @@ void __fastcall TForm1::Button9Click(TObject *Sender)
 
         do {  
 
-                // подсчет времени свипирования
+                // РїРѕРґСЃС‡РµС‚ РІСЂРµРјРµРЅРё СЃРІРёРїРёСЂРѕРІР°РЅРёСЏ
                 __int64 start, stop, f;
                 QueryPerformanceCounter((_LARGE_INTEGER*)&start);
                 QueryPerformanceFrequency((_LARGE_INTEGER*)&f);
@@ -1755,13 +1755,13 @@ void __fastcall TForm1::Button9Click(TObject *Sender)
                         freq_s = StartFreq + pn*FreqStep;
                         ScrollBar2->Position = freq_s;
 
-                        // устанавливаем частоту
+                        // СѓСЃС‚Р°РЅР°РІР»РёРІР°РµРј С‡Р°СЃС‚РѕС‚Сѓ
                         freq_set[0] = Sync_Freq;
                         freq_set[1] = (uchar)(freq_s&0x00FF);
                         freq_set[2] = (uchar)((freq_s/256)&0x0F);
 
-                        // отправляем команду
-                        WriteFT1("Ошибка записи", freq_set, sizeof(freq_set));
+                        // РѕС‚РїСЂР°РІР»СЏРµРј РєРѕРјР°РЅРґСѓ
+                        WriteFT1("РћС€РёР±РєР° Р·Р°РїРёСЃРё", freq_set, sizeof(freq_set));
 
                         Sleep(SleepInterv/5);
                         Application->ProcessMessages();
@@ -1772,14 +1772,14 @@ void __fastcall TForm1::Button9Click(TObject *Sender)
 
 
                 QueryPerformanceCounter((_LARGE_INTEGER*)&stop);
-                //время в миллисекундах
+                //РІСЂРµРјСЏ РІ РјРёР»Р»РёСЃРµРєСѓРЅРґР°С…
                 double time = 1000*(((double)(stop-start))/(double)f);
                 Panel54->Caption = FormatFloat("###0",time);
         }
         while (!Loop_Break_2);
 }
 
-// свипирование стоп --------------------------------------------------------
+// СЃРІРёРїРёСЂРѕРІР°РЅРёРµ СЃС‚РѕРї --------------------------------------------------------
 void __fastcall TForm1::Button10Click(TObject *Sender)
 {
         Loop_Break_2 = true;
@@ -1801,11 +1801,11 @@ void __fastcall TForm1::Button10Click(TObject *Sender)
         PageControl1->Enabled = true;
 }
 
-// установка коэффициента видеоусиления Ку ----------------------------------
+// СѓСЃС‚Р°РЅРѕРІРєР° РєРѕСЌС„С„РёС†РёРµРЅС‚Р° РІРёРґРµРѕСѓСЃРёР»РµРЅРёСЏ РљСѓ ----------------------------------
 void __fastcall TForm1::RadioGroup1Click(TObject *Sender)
 {
 
-        // Формируем кадр
+        // Р¤РѕСЂРјРёСЂСѓРµРј РєР°РґСЂ
         switch (RadioGroup1->ItemIndex) {
 
                 case 0:
@@ -1824,31 +1824,31 @@ void __fastcall TForm1::RadioGroup1Click(TObject *Sender)
 
         Amp_Ku_Set[0] = Ku_sync;
 
-        // Очищаем FT2    
+        // РћС‡РёС‰Р°РµРј FT2    
         ftStatus_FPU =
                 FT_Purge(ftHandle_FPU, FT_PURGE_RX | FT_PURGE_TX);
         if (ftStatus_FPU != FT_OK) {
                 Panel14->Font->Color = clRed;
-                Panel14->Caption = "ошибка очистки";
+                Panel14->Caption = "РѕС€РёР±РєР° РѕС‡РёСЃС‚РєРё";
                 return;
         }
 
-        // Отправляем
-        WriteFT2("Ошибка записи", Amp_Ku_Set, sizeof(Amp_Ku_Set));
+        // РћС‚РїСЂР°РІР»СЏРµРј
+        WriteFT2("РћС€РёР±РєР° Р·Р°РїРёСЃРё", Amp_Ku_Set, sizeof(Amp_Ku_Set));
 
 
-        // Получаем информацию
+        // РџРѕР»СѓС‡Р°РµРј РёРЅС„РѕСЂРјР°С†РёСЋ
         GetInfoFT2(Amp_Ku_Get, sizeof(Amp_Ku_Get));
 
 
-        // Проверяем синхробайт кадра
+        // РџСЂРѕРІРµСЂСЏРµРј СЃРёРЅС…СЂРѕР±Р°Р№С‚ РєР°РґСЂР°
         if (Amp_Ku_Get[0] != Ku_sync) {
                 Panel14->Font->Color = clRed;
-                Panel14->Caption = "Ошибка кадра";;
+                Panel14->Caption = "РћС€РёР±РєР° РєР°РґСЂР°";;
                 return;
         }
 
-        // Утилизируем данные 
+        // РЈС‚РёР»РёР·РёСЂСѓРµРј РґР°РЅРЅС‹Рµ 
         switch (Amp_Ku_Get[1]) {
         
                 case Ku_set_1:
